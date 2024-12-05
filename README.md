@@ -18,7 +18,7 @@
 
 ---
 
-#### **2. Fine-Tuning Process**
+#### **2. Transfer Learning Process**
 
 - **Datasets:**  
   - **Classification Task:** SST-2 (Sentiment Analysis)  
@@ -27,7 +27,7 @@
   - Split ratio: 80% train, 20% test  
   - Sampling: Stratified sampling
 
-- **Fine-Tuning Process:**  
+- **Transfer Learning Process:**  
   1. Classification Task: SST-2  
      - Loaded pre-trained Llama 3.2-1B using AutoModelForSequenceClassification.
 
@@ -51,25 +51,25 @@
   - **Recall**: Measures the ratio of correctly predicted positive observations to the all positives in the dataset.  
   - **F1 Score**: Harmonic mean of precision and recall.  
 
-  | **Pretrained (Zero-shot)** | **Fine-tuned**       |
+  | **Pretrained (Zero-shot)** | **Transfer-Learned**       |
   |--------------------|------------------------|
   |![Zero-shot](images/sst2_evalbefore.png) | ![Accuracy Fine-tuned](images/sst2_evalafter.png) |
 
 ---
 
-#### **4. Model Parameters After Fine-Tuning**
+#### **4. Model Parameters After Transfer-Learning**
 
 > **Note:** In fine-tuning we are adding a task specific head to the output of the pre-trained `Llama 3.2-1B model`(base model). While importing 
 
   1. Classification Task: SST-2 
   
   - Pre-trained model parameters: `1,235,814,400`  
-  - Fine-tuned model parameters: `1,235,818,496`  
+  - Tranfer-learned model parameters: `1,235,818,496`  
   <div align="center">
     <img src="images/sst2_params.png">
   </div>
 
-  - **Conclusion:** The total number of parameters in the pre-trained model and fine-tuned model are different due to the addition of task-specific layer. The base model parameters remain the same, and the additional parameters are due to the task-specific head added during fine-tuning and are only trained on the task-specific dataset.
+  - **Conclusion:** The total number of parameters in the pre-trained model and transfer learned model are different due to the addition of task-specific layer. The base model parameters remain the same, and the additional parameters are due to the task-specific head added during fine-tuning and are only trained on the task-specific dataset.
 
 ---
 
@@ -83,10 +83,10 @@ Fine-tuned models are uploaded to the 🤗 Hub:
 #### **6. Analysis of Results**
 
 1. Classification Task: SST-2
-    - **Higher Scores in Fine-Tuned Models:**  
-      - The fine-tuned models exhibit higher scores compared to the pre-trained models on the zero-shot evaluation. This is because the fine-tuned models are more task-specific and have learned the patterns specific to the SST-2 dataset.
-      - The fine-tuned models have a task-specific head that is trained on the SST-2 dataset, which helps in capturing the sentiment patterns effectively.
-      - The fine-tuned models are more specialized for the SST-2 task, leading to better performance compared to the zero-shot evaluation.
+    - **Higher Scores of Transfer Learned Model:**  
+      - These models exhibit higher scores compared to the pre-trained models on the zero-shot evaluation. This is because the fine-tuned models are more task-specific and have learned the patterns specific to the SST-2 dataset.
+      - These models have a task-specific head that is trained on the SST-2 dataset, which helps in capturing the sentiment patterns effectively.
+      - These models are more specialized for the SST-2 task, leading to better performance compared to the zero-shot evaluation.
 
     - **Understanding Parameter Behavior:**  
       - The number of parameters in the fine-tuned model increases due to the addition of task-specific layers which has a total of 4096 parameters.
@@ -95,10 +95,10 @@ Fine-tuned models are uploaded to the 🤗 Hub:
 
         <p align='center'><img src="images/sst2_params.png" width="500px"> </p>
 
-    - **Zero-Shot vs. Fine-Tuned Performance:**
-      - Zero-shot models generalize poorly on specialized tasks like sentiment analysis or question answering whereas fine-tuned models are more task-specific and exhibit better performance on the respective tasks.
+    - **Zero-Shot vs. Transfer Learned Model Performance:**
+      - Zero-shot models generalize poorly on specialized tasks like sentiment analysis or question answering whereas transfer learned models are more task-specific and exhibit better performance on the respective tasks.
 
-        | **Pretrained (Zero-shot)** | **Fine-tuned**      |
+        | **Pretrained (Zero-shot)** | **Transfer Learned**      |
         |--------------------|------------------------|
-        |![Zero-shot](images/sst2_evalbefore.png) | ![Accuracy Fine-tuned](images/sst2_evalafter.png) |
+        |![Zero-shot](images/sst2_evalbefore.png) | ![Accuracy Transfer Learned](images/sst2_evalafter.png) |
 
