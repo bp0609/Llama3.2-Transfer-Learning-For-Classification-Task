@@ -1,16 +1,6 @@
-# CS613-NLP Team-1 Telugu Assignment 3
-
-## Team Members
-
-1. **Bhavik Patel (22110047)** : Fine-tuned the model on SST-2 dataset and evaluated the model.
-2. **Guntas Singh Saran (22110089)** : Helped in fine-tuning the model on SQuAD dataset and evalueated the model.
-3. **Hitesh Kumar (22110098)** : Fine-tuned the model on SQuAD dataset and SST-2 dataset.
-4. **Ruchit Jagodara (22110102)** : Evaluated fine tuned model on SQuAD dataset.
-5. **Jinil Patel (22110184)** : Evaluated fine tuned model on SST-2 dataset and helped in fine-tuning of SST-2 dataset.
-
 ## Task - 1
 
-### Project: Fine-Tuning and Evaluation of the Llama 3.2-1B/Gemma Model
+### Project: Transfer Learning and Evaluation of the Llama 3.2-1B/Gemma Model
 
 ---
 
