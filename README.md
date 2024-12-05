@@ -22,7 +22,6 @@
 
 - **Datasets:**  
   - **Classification Task:** SST-2 (Sentiment Analysis)  
-  - **Question-Answering Task:** SQuAD (Stanford Question Answering Dataset)
 
 - **Train-Test Split:**  
   - Split ratio: 80% train, 20% test  
@@ -41,15 +40,6 @@
      </div>
      <br>
      
-    2. Question-Answering Task: SQuAD  
-    - Loaded pre-trained Llama 3.2-1B using AutoModelCausalLM and added custom output layer for the respective task.
-     <div align="center">
-        <img src="images/qa_trainLoss.png" width="500px">
-     </div>
-     <div align="center">
-        <img src="images/qa_training.png" width="300px">
-     </div>
-
 ---
 
 #### **3. Evaluation Metrics**
@@ -65,17 +55,6 @@
   |--------------------|------------------------|
   |![Zero-shot](images/sst2_evalbefore.png) | ![Accuracy Fine-tuned](images/sst2_evalafter.png) |
 
-##### **Question-Answering (SQuAD)**  
-- Metrics:  
-  - **squad_v2**: Performance on unanswerable questions.  
-  - **F1 Score**: Measures overlap between prediction and ground truth.  
-  - **METEOR, BLEU, ROUGE**: Evaluate textual similarity.  
-  - **Exact Match**: Measures strict correctness.
-
-  | **Pretrained (Zero-shot)** | **Fine-tuned**       |
-  |--------------------|------------------------|
-  | <img src="images/qa_evalbefore.png" width="200px"> | <img src="images/qa_evalafter.png" width="200px"> |
-
 ---
 
 #### **4. Model Parameters After Fine-Tuning**
@@ -89,14 +68,6 @@
   <div align="center">
     <img src="images/sst2_params.png">
   </div>
-  
-  2. Question-Answering Task: SQuAD  
-  
-  - Pre-trained model parameters: `1,235,814,400`  
-  - Fine-tuned model parameters: `1,235,818,498`  
-  <div align="center">
-    <img src="images/qa_params.png">
-  </div>
 
   - **Conclusion:** The total number of parameters in the pre-trained model and fine-tuned model are different due to the addition of task-specific layer. The base model parameters remain the same, and the additional parameters are due to the task-specific head added during fine-tuning and are only trained on the task-specific dataset.
 
@@ -106,7 +77,6 @@
 
 Fine-tuned models are uploaded to the 🤗 Hub: 
   - [Llama 3.2-1B Fine-Tuned on SST-2](https://huggingface.co/bp03/Classification_SST2_Llama_3.2_1B_Model/tree/main)
-  - [Llama 3.2-1B Fine-Tuned on SQuAD](https://huggingface.co/bp03/QuestionAnswering_SQUADV2_Llamma_3.2_1B/tree/main)
 
 ---
 
@@ -132,28 +102,3 @@ Fine-tuned models are uploaded to the 🤗 Hub:
         |--------------------|------------------------|
         |![Zero-shot](images/sst2_evalbefore.png) | ![Accuracy Fine-tuned](images/sst2_evalafter.png) |
 
-2. Question-Answering Task: SQuAD
-    - **Lower Scores in Fine-Tuned Models:**  
-      - The fine-tuned models exhibit lower scores compared to the pre-trained models on the zero-shot evaluation. Following could be the possible reasons for that:
-        - **Overfitting:** The fine-tuned models might overfit on the training data, leading to lower generalization on the test set.
-        - **Task-Specific Head:** The task-specific head added during fine-tuning might not be able to capture the underlying patterns effectively.
-        - **Data Mismatch:** The fine-tuned models might not have been exposed to a diverse range of examples during training, leading to lower performance.
-        - **Model Complexity:** The pre-trained model might be too complex for the task, leading to difficulties in fine-tuning.
-      - We were not able to fine-tune the model for a sufficient number of epochs due to computational constraints, as it was taking a lot of time to train the model on the entire dataset and also the kaggle notebook was crashing due to memory issues.
-
-
-    - **Understanding Parameter Behavior:**  
-      - The number of parameters in the fine-tuned model increases due to the addition of task-specific layers.  
-      - The base model parameters remain the same, and the additional parameters are only trained on the task-specific dataset.
-      - The base model parameters are freezed and only the task-specific head is trained on the task-specific dataset.
-
-        <p align='center'><img src="images/qa_params.png" width="500px"> </p>
-
-    - **Zero-Shot vs. Fine-Tuned Performance:**  
-      - Zero-shot models generalize poorly on specialized tasks like sentiment analysis or question answering whereas fine-tuned models are more task-specific and exhibit better performance on the respective tasks. But, due to the problems faced during training, we were not able to get the desired results.
-        
-          | **Pretrained (Zero-shot)** | **Fine-tuned**      |
-          |--------------------|------------------------|
-          |<img src="images/qa_evalbefore.png" width="300px"> | <img src="images/qa_evalafter.png" width="300px"> |
-
----
